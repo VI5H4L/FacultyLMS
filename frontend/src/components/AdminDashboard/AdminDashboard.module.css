@@ -1,0 +1,52 @@
+.mainDash
+{
+    
+    display: grid;
+    place-items: center;
+}
+.Topblock
+{
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 70%;
+
+}
+.Topblock div
+{
+    background-color: white;
+    padding: 0.2% 11%;
+    display: grid;
+    place-items: start;
+    margin: 1rem 1rem;
+    margin-top: 2rem;
+    width: 70%;
+   
+}
+
+.ADS{
+    background-color: white;
+}
+
+.htxt{
+    
+    position: relative;
+    left: 0;
+}
+
+.table
+{
+    display: grid;
+    grid-template-columns: 1fr 3fr 2.5fr 2.5fr 1.5fr 3fr;
+    place-items: center;
+    font-weight: 500;
+    
+}
+.table div
+{
+    width: 100%;
+    border-bottom: 0.5px solid gray;
+    display: grid;
+    place-content: center;
+}
