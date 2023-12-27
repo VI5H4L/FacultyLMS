@@ -7,13 +7,39 @@ const getAllLeaves = async (req,res) => {
     res.json(leaves);
 }
 
-const getAllEmployeeLeaves = async (req,res) => {
-    if (!req?.params?.email) return res.status(400).json({ 'message': 'Faculty ID required.' });
 
-    const faculty = await Faculty.findOne({ email : req.params.email }).exec();
+const createLeave = async (req,res) => {
+    try {
+        const email = req.params.email ? req.params.email : req.faculty.email;
+        const faculty = await Faculty.findOne({ email  }).exec();
+
+        const leave = new Leave(req.body.leave);
+        faculty.leaves.push(leave);
+        await leave.save();
+        await faculty.save();
+        res.status(201).json(leave);
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+const deleteLeave = async (req,res) => {
+    const { email, leaveId } = req.params;
+    const faculty = await Faculty.findOneAndUpdate(email, { $pull: {leaves :leaveId}});
+    const leave = await Leave.findOneAndDelete(leaveId);
+
+    if (faculty && leave) {
+        return res.json(leave);
+    } else {
+        return res.status(500).json("message : Not deleted! ");
+    }
 
 }
 
 module.exports = {
-    getAllLeaves
+    getAllLeaves,
+    createLeave,
+    deleteLeave
+
 }

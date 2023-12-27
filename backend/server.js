@@ -26,7 +26,7 @@ app.use(verifyJWT);
 //accessible to all routes
 
 
-app.use('/leave',);
+app.use('/leave',require('./routes/leave'));
 //only accesible to admin routes
 //CRUD for faculty
 

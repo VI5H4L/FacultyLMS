@@ -11,7 +11,7 @@ const getAllFaculties = async (req,res) => {
 const getFaculty = async (req, res) => {
     if (!req?.params?.email) return res.status(400).json({ 'message': 'Faculty ID required.' });
 
-    const faculty = await Faculty.findOne({ email: req.params.email }).exec();
+    const faculty = await Faculty.findOne({ email: req.params.email }).populate("leaves").exec();
     if (!faculty) {
         return res.status(204).json({ "message": `No employee found`});
     }
