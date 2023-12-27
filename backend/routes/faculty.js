@@ -1,6 +1,14 @@
 const express = require('express');
-const route = express();
+const router = express();
+const facultyController = require('../controller/facultyController');
 
-route.get('/');
+const isAdmin = require('../middleware/isAdmin');
 
-module.exports = route;
+router.get('/',isAdmin,facultyController.getAllFaculties)
+    .get('/:email',facultyController.getFaculty)
+    .post('/',isAdmin,facultyController.createNewFaculty)
+    .put('/',isAdmin,facultyController.updateFaculty)
+    .delete('/',isAdmin,facultyController.deleteFaculty)
+;
+
+module.exports = router;

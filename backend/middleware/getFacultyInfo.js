@@ -1,17 +1,15 @@
+const Faculty = require('../model/Faculty');
 
 
 
-
-const getFacultyInfo = (req,res,next) => {
+const getFacultyInfo = async (req,res) => {
     const email = req.email;
 
     //fetch from database
+    const validUser = await Faculty.findOne({ email }).exec();
 
-    const faculty = {};
+    req.faculty = validUser;
 
-    req.faculty = faculty;
-
-    next();
 };
 
 module.exports = getFacultyInfo;
