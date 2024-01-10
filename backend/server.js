@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const verifyJWT = require('./middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
 
+
+
 const PORT = process.env.PORT || 3000;
 
 
@@ -21,12 +23,16 @@ app.use('/login',require('./routes/login'));
 app.use('/refresh',require('./routes/refresh'));
 app.use('/logout',require('./routes/logout'));
 app.use(verifyJWT);
-// app.use(getFacultyInfo);
+//accessible to all routes
 
-app.get('/',(req,res) => {
-    res.send('hello');
-})
+
+app.use('/leave',require('./routes/leave'));
+//only accesible to admin routes
+//CRUD for faculty
+
 app.use('/faculty',require('./routes/faculty'));
+
+
 
 
 mongoose.connection.once('open', () => {
