@@ -1,2 +1,0 @@
-# LeaveManagmentSystem
-LeaveManagmentSystem For LNMIIT

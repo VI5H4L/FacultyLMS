@@ -1,0 +1,67 @@
+.LvHis
+{
+    z-index: -2;
+    display: grid;
+    place-items: center;
+    
+}
+.title
+{
+    background-color: #f4f4f4;
+    width: 80%;
+    color: rgb(77, 73, 73);
+}
+.Drop_down
+{
+    opacity: 1;
+}
+.Drop_down select option
+{
+    background-color: white;
+}
+.form_inp
+{
+    margin:1rem 0;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    font-size: 1.2rem;
+}
+.dashb
+{
+    width: fit-content;
+    padding:5%;
+    background-color: white;
+    height: auto;
+
+}
+.dashb1
+{
+    width: 100%;
+    display: grid;
+    place-items: start;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    margin-bottom: .625rem;
+
+
+}
+.dashb1 select
+{
+    padding: 10px;
+}
+.table
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 2fr 1.5fr 2fr 1fr;
+    place-items: center;
+    font-weight: 500;
+    
+}
+.table div
+{
+    width: 100%;
+    border: 0.5px solid gray;
+    display: grid;
+    place-content: center;
+}
