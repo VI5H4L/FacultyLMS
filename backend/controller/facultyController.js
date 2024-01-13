@@ -1,6 +1,6 @@
-
-
+const bcrypt = require('bcrypt');
 const Faculty = require('../model/Faculty');
+const generateDefaultPassword = require('../utils/generateDefaultPassword');
 
 const getAllFaculties = async (req,res) => {
     const faculties = await Faculty.find();
@@ -19,20 +19,25 @@ const getFaculty = async (req, res) => {
 }
 
 const createNewFaculty = async (req, res) => {
-    if (!req?.body?.email || !req?.body?.password) {
-        return res.status(400).json({ 'message': 'email and password are required' });
-    }
+    const faculty = req.body;
 
-    try {
-        const result = await Faculty.create({
-            email : req.body.email,
-            password : req.body.password
-        });
+    const duplicate = await Faculty.findOne({ email:email }).exec();
+    if (duplicate) return res.sendStatus(409); //Conflict 
 
-        res.status(201).json(result);
-    } catch (err) {
-        console.error(err);
-    }
+    const password = generateDefaultPassword();
+
+    const hashedPwd = await bcrypt.hash(password, 10);
+    const result = await Faculty.create({
+        "name" : faculty.name,
+        "email" : faculty.email,
+        "password" : hashedPwd,
+        "department" : faculty.department
+    });
+
+    console.log(result);
+    //send mail
+
+    res.status(201).json({ 'success': `New faculty ${faculty.name} created!` });
 }
 
 const updateFaculty = async (req, res) => {
