@@ -8,10 +8,12 @@ import AdminDashboard from './pages/AdminDashboard';
 import ManageDepartments from './pages/ManageDepartment';
 import ManageEmployees from './pages/ManageEmployees';
 import CHpass from './pages/ChangePassword';
+import Profile from './pages/Profile';
 function App() {
   return (
     <React.Fragment>
         <Home />
+        <Profile />
         <FacultyHistory />
         <FacultyLeaveRequest/>
         <AdminDashboard />

@@ -11,12 +11,14 @@ const Login = () => {
                     <form className={`${styles.form_div}`}>
                         <input className={`${styles.form_inp}`} type="email" name="name" placeholder="Email id"></input>
                         <input className={`${styles.form_inp}`} type="password" name="name" placeholder="Password"></input>
+                        {/*
                         <select name="Designation" className={`${styles.drop_down}`}>
                             <option value="Admin">Admin</option>
                             <option value="Faculty">Faculty</option>
                             <option value="HOD">HOD</option>
                             <option value="Director">Director</option>
                         </select>
+    */}
                         <div className={`${styles.form_but}`}><button type="submit">SIGN IN</button></div>
                     </form>
                 </div>
