@@ -15,26 +15,6 @@ const leaveSchema = new mongoose.Schema(
             enum: ["pending", "approved", "denied"],
             default: "pending"
         },
-        adminStatus : {
-            type : String,
-            enum: ["pending", "approved", "denied"],
-            default: "pending"
-        },
-        hodStatus : {
-            type : String,
-            enum: ["pending", "approved", "denied"],
-            default: "pending"
-        },
-        dofaStatus : {
-            type : String,
-            enum: ["pending", "approved", "denied"],
-            default: "pending"
-        },
-        directorStatus : {
-            type : String,
-            enum: ["pending", "approved", "denied"],
-            default: "pending"
-        },
         faculty : {
             id :{
                 type : mongoose.Schema.Types.ObjectId,
