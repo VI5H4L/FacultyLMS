@@ -1,5 +1,7 @@
 const Leave = require('../model/Leave');
 const Faculty = require('../model/Faculty');
+const fsPromises = require('fs').promises;
+const path = require('path');
 const sendMail = require('../utils/mails');
 
 const getAllLeaves = async (req,res) => {
@@ -25,18 +27,27 @@ const createLeave = async (req,res) => {
                 return;
             }
         }
-
         faculty.leaves.push(leave);
         await leave.save();
         await faculty.save();
-
+        let reciever;
         if (days < 7) {
-            await sendMail(process.env.EMAIL_HOD);
+            reciever = process.env.EMAIL_HOD;
         } else if (days >=7 && days < 30) {
-            await sendMail(process.env.EMAIL_DOFA);
+            reciever = process.env.EMAIL_DOFA;
         } else if ( days >= 30) {
-            await sendMail(process.env.EMAIL_DIR);
+            reciever = process.env.EMAIL_DIR;
         }
+
+        const fileData = await fsPromises.readFile(path.join('..','views','newLeaveApplied.html'),'utf-8');
+
+        const emailBody = fileData;
+        const mailOptions  = {
+            to: reciever,
+            subject: "FLMS Leave",
+            html: emailBody 
+        }
+        await sendMail(mailOptions);
         res.status(201).json(leave);
     } catch (err) {
         console.error(err);

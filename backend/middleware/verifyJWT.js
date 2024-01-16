@@ -15,7 +15,10 @@ const verifyJWT = async (req, res, next) => {
             req.email = decoded.UserInfo.email;
         }
     );
-    const validUser = await Faculty.findOne({ email : req.email }).exec();
+    const validUser = await Faculty.findOne({ email : req.email }).populate("leaves").exec();
+    if (!validUser) {
+        return res.sendStatus(401);
+    }
     req.faculty = validUser;
     next();
 }

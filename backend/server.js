@@ -19,8 +19,6 @@ app.use('/login',require('./routes/login'));
 app.use('/refresh',require('./routes/refresh'));
 app.use('/logout',require('./routes/logout'));
 app.use(verifyJWT);
-//accessible to all routes
-
 app.use('/leave',require('./routes/leave'));
 app.use('/faculty',require('./routes/faculty'));
 

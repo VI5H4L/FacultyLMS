@@ -7,13 +7,30 @@ const leaveSchema = new mongoose.Schema(
         days : Number,
         typeOfLeave : {
             type : String,
-            enum : ["CL","PL","OD"],
-            default : "CL"
+            enum : ["CL","PL","OD"]
         },
+        reason : String,
         status : {
             type : String,
             enum: ["pending", "approved", "denied"],
             default: "pending"
+        },
+        rescheduledClass : {
+            date : Date,
+            time : String,         
+            default : null
+        },
+        invigilationDuty : {
+            substitute : {
+                email : String
+            },
+            default : null
+        },
+        administrativeResponsibility : {
+            substitute : {
+                email : String
+            },
+            default : null
         },
         faculty : {
             id :{

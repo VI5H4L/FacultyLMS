@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 const facultySchema = new mongoose.Schema({
+  employeeNumber : String,
   name: String,
   email: String,
+  designation : String,
   password: String,
   refreshToken : String,
   department: String,
