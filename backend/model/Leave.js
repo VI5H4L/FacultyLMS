@@ -15,23 +15,6 @@ const leaveSchema = new mongoose.Schema(
             enum: ["pending", "approved", "denied"],
             default: "pending"
         },
-        rescheduledClass : {
-            date : Date,
-            time : String,         
-            default : null
-        },
-        invigilationDuty : {
-            substitute : {
-                email : String
-            },
-            default : null
-        },
-        administrativeResponsibility : {
-            substitute : {
-                email : String
-            },
-            default : null
-        },
         faculty : {
             id :{
                 type : mongoose.Schema.Types.ObjectId,

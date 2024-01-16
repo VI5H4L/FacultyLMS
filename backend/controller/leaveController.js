@@ -2,6 +2,7 @@ const Leave = require('../model/Leave');
 const Faculty = require('../model/Faculty');
 const fsPromises = require('fs').promises;
 const path = require('path');
+//const file = require('../views')
 const sendMail = require('../utils/mails');
 
 const getAllLeaves = async (req,res) => {
@@ -14,14 +15,16 @@ const createLeave = async (req,res) => {
     try {
         const email = req.params.email ? req.params.email : req.faculty.email;
         const faculty = await Faculty.findOne({ email  }).exec();
-        const leave = new Leave(req.body.leave);      
+        console.log(faculty);
+        const leave = new Leave(req.body.leave);
+        console.log(leave);      
 
-        if ( leave.type == 'CL' ) {
-            if(faculty.CLLeavesLeft < leave.days || leave.days >= 2) {
+        if ( leave.typeOfLeave == 'CL' ) {
+            if(faculty.CLLeavesLeft < leave || leave.days >= 2) {
                 res.status(406).json({'message' : 'Leave not accepted'});
                 return;
             }
-        } else if( leave.type == 'PL' ){
+        } else if( leave.typeOfLeave == 'PL' ){
             if( faculty.PLLeaves < leave.days || leave.days < 3) {
                 res.status(406).json({'message' : 'Leave not accepted'});
                 return;
@@ -31,6 +34,7 @@ const createLeave = async (req,res) => {
         await leave.save();
         await faculty.save();
         let reciever;
+        const days = leave.days;
         if (days < 7) {
             reciever = process.env.EMAIL_HOD;
         } else if (days >=7 && days < 30) {
@@ -38,9 +42,7 @@ const createLeave = async (req,res) => {
         } else if ( days >= 30) {
             reciever = process.env.EMAIL_DIR;
         }
-
-        const fileData = await fsPromises.readFile(path.join('..','views','newLeaveApplied.html'),'utf-8');
-
+        const fileData = await fsPromises.readFile(path.join(__dirname,'..','views','newLeaveApplied.html'),'utf-8');
         const emailBody = fileData;
         const mailOptions  = {
             to: reciever,

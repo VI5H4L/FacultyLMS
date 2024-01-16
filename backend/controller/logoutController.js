@@ -1,26 +1,13 @@
 const Faculty = require('../model/Faculty');
 
 const handleLogout = async (req, res) => {
-    // On client, also delete the accessToken
-
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(204); //No content
-    const refreshToken = cookies.jwt;
-
-    // Is refreshToken in db?
-    const foundUser = await Faculty.findOne({ refreshToken }).exec();
-    if (!foundUser) {
-        res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
-        return res.sendStatus(204);
-    }
-
-    // Delete refreshToken in db
-    foundUser.refreshToken = '';
-    const result = await foundUser.save();
-    console.log(result);
-
+    const accessToken = cookies.jwt;
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
-    res.sendStatus(204);
+    res.status(204).json({"message" : "User has been logged out"});
+    console.log(accessToken);
+    console.log('User has been logged out');
 }
 
 module.exports = { handleLogout }

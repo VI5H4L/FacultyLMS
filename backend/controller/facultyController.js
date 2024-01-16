@@ -3,6 +3,7 @@ const fsPromises = require('fs').promises;
 const Faculty = require('../model/Faculty');
 const generateDefaultPassword = require('../utils/generateDefaultPassword');
 const path = require('path');
+const sendMail = require('../utils/mails');
 
 const getAllFaculties = async (req,res) => {
     const faculties = await Faculty.find();
@@ -24,7 +25,7 @@ const createNewFaculty = async (req, res) => {
     if(!req?.body) return res.sendStatus(400);
     const faculty = req.body;
 
-    const duplicate = await Faculty.findOne({ email:email }).exec();
+    const duplicate = await Faculty.findOne({ email: faculty.email }).exec();
     if (duplicate) return res.sendStatus(409); //Conflict 
 
     const password = generateDefaultPassword();
@@ -40,7 +41,7 @@ const createNewFaculty = async (req, res) => {
 
     console.log(result);
     //send mail to faculty regarding default password
-    const fileData = await fsPromises.readFile(path.join('..','views','newFacultyMail.html'),'utf-8');
+    const fileData = await fsPromises.readFile(path.join(__dirname,'..','views','newFacultyMail.html'),'utf-8');
 
     const emailBody = fileData.replace('{{TEMP_PASSWORD}}',password);
     const mailOptions = {
