@@ -2,7 +2,7 @@ import './App.css';
 import Home from './pages/Login';
 import FacultyHistory from './pages/FacultyLeaveHistory';
 import { useState } from 'react';
-import { Route,Switch } from 'react-router-dom';
+import { Route,Routes,Switch } from 'react-router-dom';
 import React from 'react';
 import FacultyLeaveRequest from './pages/FacultyLeaveRequest';
 import AdminDashboard from './pages/AdminDashboard';
@@ -14,14 +14,18 @@ function App() {
 
   return (
     <React.Fragment>
-        <Home/>
-        <Profile />
-        <FacultyHistory />
-        <FacultyLeaveRequest/>
-        <AdminDashboard />
-        <ManageDepartments /> 
-        <ManageEmployees />
-        <CHpass />
+      <Routes>
+     <Route path='/' element={ <Home/>}></Route>
+     <Route path='/leavehistory' element={<FacultyHistory></FacultyHistory>}></Route>
+     <Route path='/profile' element={<Profile></Profile>}></Route>
+     <Route path='/profile' element={<Profile></Profile>}></Route>
+     <Route path='/leaverequest' element={<FacultyHistory></FacultyHistory>}></Route>
+<Route path='/admin' element={<AdminDashboard></AdminDashboard>}></Route>
+<Route path='/ManageDepartments' element={<ManageDepartments></ManageDepartments>}></Route>
+<Route path='/ManageEmployees' element={ <ManageEmployees />}></Route>
+<Route path='/CHpass' element={ <CHpass />}></Route>
+      </Routes>
+
 
     </React.Fragment>
   );
