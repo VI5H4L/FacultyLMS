@@ -10,12 +10,10 @@ function Home() {
     const LOCAL_STORAGE_KEY = "credentials";
     const [credentials, setCredentials] = useState([]);
     const addHandler = (credentials) => {
-
         setCredentials([credentials]);
     };
-    useEffect(()=>{
-        console.log(initial);
-    })
+    
+
     useEffect(() => {
         if(credentials.length>0)
         {
