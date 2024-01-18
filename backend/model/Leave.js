@@ -7,9 +7,9 @@ const leaveSchema = new mongoose.Schema(
         days : Number,
         typeOfLeave : {
             type : String,
-            enum : ["CL","PL","OD"],
-            default : "CL"
+            enum : ["CL","PL","OD"]
         },
+        reason : String,
         status : {
             type : String,
             enum: ["pending", "approved", "denied"],

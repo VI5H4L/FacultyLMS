@@ -1,12 +1,6 @@
-
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Faculty = require('../model/Faculty');
-//LOGIN page
-//1.check for valid input
-//2. Check for usern ame
-//3.Compare password 
-//4.Provide login
 
 const handleLogin = async (req,res)=>{
     const {email , password} = req.body;
@@ -25,18 +19,10 @@ const handleLogin = async (req,res)=>{
                 }
             },//payload
             process.env.ACCESS_TOKEN_SECRET,//key
-            { expiresIn : '10m'}//options
+            { expiresIn : '3d'}//options
         );
-        const refreshToken = jwt.sign(
-            { "email":validUser.email},//payload
-            process.env.REFRESH_TOKEN_SECRET,//key
-            { expiresIn : '1d'}//options
-        );
-
-        //add refresh token to DB
-        const result = await Faculty.updateOne(validUser, {  refreshToken });
         
-        res.cookie('jwt',refreshToken,{ httpOnly:true, maxAge : 24 * 60 * 60 * 1000 });
+        res.cookie('jwt',accessToken,{ httpOnly:true, maxAge : 24 * 60 * 60 * 1000 });
         res.json( {accessToken} );
         
     }
