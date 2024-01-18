@@ -22,7 +22,7 @@ class Login extends React.Component {
 
         const { dataSend } = this.context;
         console.log("called")
-        dataSend("", {});
+        dataSend("",this.state);
     };
 
     render() {

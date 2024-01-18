@@ -17,7 +17,7 @@ const dataSend=async(path,obj)=>{
         body: JSON.stringify(obj),
       });
   const resJson = await response.json();
-  console.log(resJson.message);
+  console.log(resJson);
   }catch(e){
     console.log("issue occured");
   }
