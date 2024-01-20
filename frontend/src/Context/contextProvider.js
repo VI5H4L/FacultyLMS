@@ -1,23 +1,23 @@
 // MyContextProvider.js
 import React, { useState,useContext } from "react";
 
-
+import Cookies from 'js-cookie';
 import MyContext from "./createContext";
 const MyContextProvider = ({ children }) => {
 const[initial,setInitial]=useState("context value");
 
 const dataSend=async(path,obj)=>{
   try{
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('http://localhost:3500/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          // Add any additional headers if needed
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(obj),
       });
   const resJson = await response.json();
-  console.log(resJson.message);
+  const token = Cookies.get('jwt');
+  console.log(token);
   }catch(e){
     console.log("issue occured");
   }

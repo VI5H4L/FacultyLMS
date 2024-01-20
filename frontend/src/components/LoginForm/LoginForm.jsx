@@ -10,7 +10,7 @@ class Login extends React.Component {
         password: ""
     };
 
-    add = (e) => {
+    add = async (e) => {
         e.preventDefault();
         if (this.state.email === "" || this.state.password === "") {
             alert("All fields are mandatory!!");
@@ -22,7 +22,7 @@ class Login extends React.Component {
 
         const { dataSend } = this.context;
         console.log("called")
-        dataSend("", {});
+        await dataSend("", this.state);
     };
 
     render() {
