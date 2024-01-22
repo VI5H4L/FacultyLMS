@@ -6,7 +6,6 @@ const facultySchema = new mongoose.Schema({
   email: String,
   designation : String,
   password: String,
-  refreshToken : String,
   department: String,
   dateOfJoining : Date,
   CLLeavesLeft : {

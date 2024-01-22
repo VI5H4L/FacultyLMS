@@ -1,11 +1,11 @@
 // MyContextProvider.js
 import React, { useState,useContext } from "react";
-
-
+import Cookies from 'js-cookie';
 import MyContext from "./createContext";
 const MyContextProvider = ({ children }) => {
 const[initial,setInitial]=useState("context value");
 const token = Cookies.get('jwt');
+
 const findPos=async()=>{
   const token = localStorage.getItem('factoken');
   const obj = {"token":token};

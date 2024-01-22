@@ -14,9 +14,9 @@ const getAllLeaves = async (req,res) => {
 const createLeave = async (req,res) => {
     try {
         const email = req.params.email ? req.params.email : req.faculty.email;
-        const faculty = await Faculty.findOne({ email  }).exec();
+        const faculty = await Faculty.findOne({ email }).exec();
         console.log(faculty);
-        const leave = new Leave(req.body.leave);
+        const leave = new Leave(req.body);
         console.log(leave);      
 
         if ( leave.typeOfLeave == 'CL' ) {
@@ -71,7 +71,7 @@ const updateLeave = async (req, res) => {
     await faculty.save();
     const result = await leave.save();
     res.json(result);
-}
+};
 
 const deleteLeave = async (req,res) => {
     const { email, leaveId } = req.params;
@@ -83,11 +83,46 @@ const deleteLeave = async (req,res) => {
     } else {
         return res.status(500).json("message : Not deleted! ");
     }
-}
+};
+
+const handleLeaveResponse = async (req,res) => {
+    try {
+        const { email,leaveID,status } = req.body;
+        if (!status) return req.status(401).json({'message' : 'Status is required'});
+        
+        const faculty = await Faculty.findOne( {email} ).exec();
+        const leave = await Leave.findOne( {leaveID} ).exec();
+
+        if (leave.status == status) return res.status(200).json( {'message' : 'Leave already responde'} );
+
+        leave.status = status;
+        if (leave.status == 'approved') {
+            const type = leave.typeOfLeave;
+
+            if(type == 'CL') {
+                faculty.CLLeavesLeft = faculty.CLLeavesLeft - leave.days;
+            }
+            if (type == 'PL') {
+                faculty.PLLeaves = faculty.PLLeaves - leave.days;
+            }
+        }
+        const result = await leave.save();
+        await faculty.save();
+
+        if (!result) return res.sendStatus(500);
+        
+        res.status(200).json(result);  
+
+    } catch (err) {
+        return res.sendStatus(404);
+    }
+
+};
 
 module.exports = {
     getAllLeaves,
     createLeave,
     updateLeave,
-    deleteLeave
+    deleteLeave,
+    handleLeaveResponse
 }

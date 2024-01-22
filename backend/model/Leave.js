@@ -19,8 +19,7 @@ const leaveSchema = new mongoose.Schema(
             id :{
                 type : mongoose.Schema.Types.ObjectId,
                 ref : "Faculty"
-            },
-            name: String
+            }
         }
     }
 )
