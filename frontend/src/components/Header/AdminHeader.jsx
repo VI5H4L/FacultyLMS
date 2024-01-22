@@ -45,7 +45,7 @@ function AdminHeader() {
                         <li><Link className={`${styles.tabs}`} to="/addemp"><MdPermContactCalendar /> Add Employee</Link></li>
                         {/* <li><Link className={`${styles.tabs}`} to="/ManageEmployees"><div><MdPermContactCalendar /></div> <div>Employees</div></Link></li> */}
                         <li><Link className={`${styles.tabs}`} to="/admin"><MdOutlineMonitor /> Leave Management</Link></li>
-                        <li><Link className={`${styles.tabs}`} to="/CHpass"><TbPasswordFingerprint /> Change Password</Link></li>
+                        <li><Link className={`${styles.tabs}`} to="/CHpassA"><TbPasswordFingerprint /> Change Password</Link></li>
                         <li onClick={rmv}><Link className={`${styles.tabs}`} to="/"><IoMdLogOut /> Sign Out</Link></li>
 
                     </ul>

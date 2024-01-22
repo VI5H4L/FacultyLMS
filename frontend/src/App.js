@@ -11,7 +11,7 @@ import ManageEmployees from './pages/ManageEmployees';
 import CHpass from './pages/ChangePassword';
 import Profile from './pages/Profile';
 import AddEmp from './pages/AddEmp';
-
+import CHpassA from './pages/ChangePasswordAdmin';
 function App() {
 
   return (
@@ -25,6 +25,7 @@ function App() {
 <Route path='/ManageDepartments' element={<ManageDepartments></ManageDepartments>}></Route>
 <Route path='/ManageEmployees' element={ <ManageEmployees />}></Route>
 <Route path='/CHpass' element={ <CHpass />}></Route>
+<Route path='/CHpassA' element={ <CHpassA />}></Route>
 <Route path='/addemp' element={ <AddEmp />}></Route>
 
       </Routes>
