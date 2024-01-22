@@ -8,6 +8,8 @@ import { IoMdLogOut } from "react-icons/io";
 import Avatar from '../../images/Avatar.png'
 import { TbBracketsAngle } from "react-icons/tb";
 import { MdOutlineMonitor } from "react-icons/md";
+import { Link } from 'react-router-dom';
+
 
 function AdminHeader() {
 
@@ -16,6 +18,10 @@ function AdminHeader() {
     const ham = () => {
         setActive(!isActive);
     };
+
+    const rmv=()=>{
+        localStorage.clear();
+    }
 
     return (
 
@@ -33,13 +39,14 @@ function AdminHeader() {
                 <div className={`${styles.sidetext}`}>
                     <div className={`${styles.userlogo}`}><img src={Avatar} alt="User" className={`${styles.userimg}`}></img><h4>Admin</h4></div>
                     <ul className={`${styles.tabs1}`}>
-                        <li><a className={`${styles.tabs}`} href="/"><TbPasswordFingerprint /> Dashboard</a></li>
-                        <li><a className={`${styles.tabs}`} href="/"><BsFillGrid3X3GapFill /> Department</a></li>
-                        <li><a className={`${styles.tabs}`} href="/"><TbBracketsAngle /> Leave Type</a></li>
-                        <li ><a className={`${styles.tabs}`} href="/"><div><MdPermContactCalendar /></div> <div>Employees</div></a></li>
-                        <li><a className={`${styles.tabs}`} href="/"><MdOutlineMonitor /> Leave Management</a></li>
-                        <li><a className={`${styles.tabs}`} href="/"><TbPasswordFingerprint /> Change Password</a></li>
-                        <li><a className={`${styles.tabs}`} href="/"><IoMdLogOut /> Sign Out</a></li>
+                        <li><Link className={`${styles.tabs}`} to="/admin"><TbPasswordFingerprint /> Dashboard</Link></li>
+                        <li><Link className={`${styles.tabs}`} to="/ManageDepartments"><BsFillGrid3X3GapFill /> Department</Link></li>
+                        {/* <li><Link className={`${styles.tabs}`} to="/"><TbBracketsAngle /> Leave Type</Link></li> */}
+                        <li><Link className={`${styles.tabs}`} to="/addemp"><MdPermContactCalendar /> Add Employee</Link></li>
+                        {/* <li><Link className={`${styles.tabs}`} to="/ManageEmployees"><div><MdPermContactCalendar /></div> <div>Employees</div></Link></li> */}
+                        <li><Link className={`${styles.tabs}`} to="/admin"><MdOutlineMonitor /> Leave Management</Link></li>
+                        <li><Link className={`${styles.tabs}`} to="/CHpass"><TbPasswordFingerprint /> Change Password</Link></li>
+                        <li onClick={rmv}><Link className={`${styles.tabs}`} to="/"><IoMdLogOut /> Sign Out</Link></li>
 
                     </ul>
 
