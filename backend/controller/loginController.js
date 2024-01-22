@@ -11,7 +11,7 @@ const handleLogin = async (req,res)=>{
     if (!validUser) return res.sendStatus(401);
     const validPass = await bcrypt.compare(password,validUser.password); 
     console.log("come here");
-console.log(validPass)
+    console.log(validPass)
     if  (validPass) {
         //create JWT
         const accessToken = jwt.sign(
@@ -32,31 +32,31 @@ console.log(validPass)
 
 }
 const sendDesignation=async(req,res)=>{
-try{
-    console.log("called");
-const token= req.body.token;
-if(!token){
-    throw Error("Issue In the Token");
-}
-await jwt.verify(token,process.env.ACCESS_TOKEN_SECRET, async(err, data) => {
-    if (err) {
-     throw Error(err);
-    } else {
-console.log(data.UserInfo.email);
-const em = data.UserInfo.email;
-const fac = await Faculty.findOne({email:em});
-console.log(fac);
-res.json({
-    position:fac.designation,
-    
-});
+    try{
+        console.log("called");
+        const token= req.body.token;
+        if(!token){
+            throw Error("Issue In the Token");
+        }
+        await jwt.verify(token,process.env.ACCESS_TOKEN_SECRET, async(err, data) => {
+        if (err) {
+            throw Error(err);
+        } else {
+            console.log(data.UserInfo.email);
+            const em = data.UserInfo.email;
+            const fac = await Faculty.findOne({email:em});
+            console.log(fac);
+            res.json({
+                position:fac.designation,
+                
+            });
+        }
+        });
+    }catch(e){
+        res.json({
+            "message":e.message
+        })
     }
-});
-}catch(e){
-res.json({
-    "message":e.message
-})
-}
 }
 
 module.exports = { handleLogin,sendDesignation };

@@ -36,7 +36,11 @@ const createNewFaculty = async (req, res) => {
         name : faculty.name,
         email : faculty.email,
         password : hashedPwd,
-        department : faculty.department
+        department : faculty.department,
+        designation : faculty.designation,
+        dateOfJoining : faculty.dateOfJoining,
+        CLLeavesLeft : faculty.CLLeavesLeft,
+        PLLeaves : faculty.PLLeaves
     });
 
     console.log(result);

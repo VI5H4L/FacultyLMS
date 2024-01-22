@@ -1,11 +1,11 @@
 // MyContextProvider.js
 import React, { useState,useContext } from "react";
-
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 import MyContext from "./createContext";
 const MyContextProvider = ({ children }) => {
 const[initial,setInitial]=useState("context value");
 const token = Cookies.get('jwt');
+
 const findPos=async()=>{
   const token = localStorage.getItem('factoken');
   const obj = {"token":token};
@@ -24,25 +24,16 @@ const findPos=async()=>{
   
 const dataSend=async(path,obj)=>{
   try{
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('http://localhost:3500/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+          'Content-Type': 'application/json',
+          // Add any additional headers if needed
         },
         body: JSON.stringify(obj),
       });
   const resJson = await response.json();
-// Extract cookies from the response headers
-const cookies = response.headers.get('jwt');
-console.log(token);
-// Save the cookies to the document.cookie
-if (cookies) {
-  document.cookie = cookies;
-}
-localStorage.setItem('factoken',resJson.accessToken);
-  console.log(resJson);
- await findPos();
+  console.log(resJson.message);
   }catch(e){
     console.log("issue occured");
   }
