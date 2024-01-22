@@ -106,6 +106,7 @@ const handleLeaveResponse = async (req,res) => {
                 faculty.PLLeaves = faculty.PLLeaves - leave.days;
             }
         }
+        leave.lastLeave = new Date();
         const result = await leave.save();
         await faculty.save();
 
