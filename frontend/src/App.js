@@ -2,7 +2,7 @@ import './App.css';
 import Home from './pages/Login';
 import FacultyHistory from './pages/FacultyLeaveHistory';
 import { useState } from 'react';
-import { Route,Routes,Switch } from 'react-router-dom';
+import { Route, Routes, Switch } from 'react-router-dom';
 import React from 'react';
 import FacultyLeaveRequest from './pages/FacultyLeaveRequest';
 import AdminDashboard from './pages/AdminDashboard';
@@ -12,21 +12,23 @@ import CHpass from './pages/ChangePassword';
 import Profile from './pages/Profile';
 import AddEmp from './pages/AddEmp';
 import CHpassA from './pages/ChangePasswordAdmin';
+import ProfileA from './pages/ProfileAdmin';
 function App() {
 
   return (
     <React.Fragment>
       <Routes>
-     <Route path='/' element={ <Home/>}></Route>
-     <Route path='/leavehistory' element={<FacultyHistory></FacultyHistory>}></Route>
-     <Route path='/profile' element={<Profile></Profile>}></Route>
-     <Route path='/leaverequest' element={<FacultyLeaveRequest></FacultyLeaveRequest>}></Route>
-<Route path='/admin' element={<AdminDashboard></AdminDashboard>}></Route>
-<Route path='/ManageDepartments' element={<ManageDepartments></ManageDepartments>}></Route>
-<Route path='/ManageEmployees' element={ <ManageEmployees />}></Route>
-<Route path='/CHpass' element={ <CHpass />}></Route>
-<Route path='/CHpassA' element={ <CHpassA />}></Route>
-<Route path='/addemp' element={ <AddEmp />}></Route>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/leavehistory' element={<FacultyHistory></FacultyHistory>}></Route>
+        <Route path='/profile' element={<Profile></Profile>}></Route>
+        <Route path='/profileA' element={<ProfileA></ProfileA>}></Route>
+        <Route path='/leaverequest' element={<FacultyLeaveRequest></FacultyLeaveRequest>}></Route>
+        <Route path='/admin' element={<AdminDashboard></AdminDashboard>}></Route>
+        <Route path='/ManageDepartments' element={<ManageDepartments></ManageDepartments>}></Route>
+        <Route path='/ManageEmployees' element={<ManageEmployees />}></Route>
+        <Route path='/CHpass' element={<CHpass />}></Route>
+        <Route path='/CHpassA' element={<CHpassA />}></Route>
+        <Route path='/addemp' element={<AddEmp />}></Route>
 
       </Routes>
 

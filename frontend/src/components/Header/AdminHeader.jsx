@@ -40,6 +40,7 @@ function AdminHeader() {
                     <div className={`${styles.userlogo}`}><img src={Avatar} alt="User" className={`${styles.userimg}`}></img><h4>Admin</h4></div>
                     <ul className={`${styles.tabs1}`}>
                         <li><Link className={`${styles.tabs}`} to="/admin"><TbPasswordFingerprint /> Dashboard</Link></li>
+                        <li><Link className={`${styles.tabs}`} to="/profileA"><TbPasswordFingerprint /> Profile</Link></li>
                         <li><Link className={`${styles.tabs}`} to="/ManageDepartments"><BsFillGrid3X3GapFill /> Department</Link></li>
                         {/* <li><Link className={`${styles.tabs}`} to="/"><TbBracketsAngle /> Leave Type</Link></li> */}
                         <li><Link className={`${styles.tabs}`} to="/addemp"><MdPermContactCalendar /> Add Employee</Link></li>
