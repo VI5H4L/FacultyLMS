@@ -48,10 +48,27 @@ localStorage.setItem('factoken',resJson.accessToken);
   }
 
 }
+// temp function
+const dataSend2=async(path,obj)=>{
+  try{
+    const response = await fetch(path, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj),
+      });
+  const resJson = await response.json();
+
+  console.log(resJson);
+  }catch(e){
+    console.log("issue occured");
+  }
+
+}
 
 
-
-const obj ={initial,setInitial,dataSend}
+const obj ={initial,setInitial,dataSend,dataSend2}
 
   return (
     <MyContext.Provider value={obj}>
