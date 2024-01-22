@@ -20,6 +20,11 @@ const findPos=async()=>{
   console.log("pos called");
   console.log(resJson);
   localStorage.setItem("pos",resJson.position);
+  localStorage.setItem("CLLeavesLeft",resJson.CLLeavesLeft);
+  localStorage.setItem("PLLeaves",resJson.PLLeaves);
+  localStorage.setItem('department',resJson.department);
+  localStorage.setItem('email',resJson.email);
+  localStorage.setItem('name',resJson.name);
   }
   
 const dataSend=async(path,obj)=>{
@@ -48,6 +53,7 @@ localStorage.setItem('factoken',resJson.accessToken);
   }
 
 }
+
 // temp function
 const dataSend2=async(path,obj)=>{
   try{
