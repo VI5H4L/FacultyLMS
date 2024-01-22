@@ -51,10 +51,12 @@ localStorage.setItem('factoken',resJson.accessToken);
 // temp function
 const dataSend2=async(path,obj)=>{
   try{
+    const token = localStorage.getItem("factoken");
     const response = await fetch(path, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(obj),
       });

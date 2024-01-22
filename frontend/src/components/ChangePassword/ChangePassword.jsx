@@ -14,7 +14,7 @@ function ChangePassword() {
     const onSubmit = (e) => {
         e.preventDefault(); // Prevent the form from submitting and page reloading
         console.log(form);
-        dataSend2("'http://localhost:3000/changePassword",form);
+        dataSend2("http://localhost:3000/changePassword",form);
     }
 
     return (
