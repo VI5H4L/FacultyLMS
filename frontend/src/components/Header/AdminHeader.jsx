@@ -14,7 +14,8 @@ import { Link } from 'react-router-dom';
 function AdminHeader() {
 
     const [isActive, setActive] = useState("false");
-
+    const name=localStorage.getItem('name');
+    const email=localStorage.getItem('email');
     const ham = () => {
         setActive(!isActive);
     };
@@ -37,7 +38,8 @@ function AdminHeader() {
             </div>
             <div className={isActive ? `${styles.sidebar} ` : `${styles.sidebar} ${styles.navactive}`}>
                 <div className={`${styles.sidetext}`}>
-                    <div className={`${styles.userlogo}`}><img src={Avatar} alt="User" className={`${styles.userimg}`}></img><h4>Admin</h4></div>
+                <div className={`${styles.navtitle}`}><div><h2>{name}</h2></div>
+                <div><h3 style={{marginBottom: "5%",marginTop:"2%"}}>{email}</h3></div></div>
                     <ul className={`${styles.tabs1}`}>
                         <li><Link className={`${styles.tabs}`} to="/admin"><TbPasswordFingerprint /> Dashboard</Link></li>
                         <li><Link className={`${styles.tabs}`} to="/profileA"><TbPasswordFingerprint /> Profile</Link></li>

@@ -30,7 +30,8 @@ function FacultyHeader() {
         console.log(Leavehide);
 
     };
-
+    const name=localStorage.getItem('name');
+    const email=localStorage.getItem('email');
 
     return (
 
@@ -46,17 +47,18 @@ function FacultyHeader() {
             </div>
             <div className={isActive ? `${styles.sidebar} ` : `${styles.sidebar} ${styles.navactive}`}>
                 <div className={`${styles.sidetext}`}>
-                    <div className={`${styles.userlogo}`}><img src={Avatar} alt="User" className={`${styles.userimg}`}></img><h4>Username</h4></div>
+                    <div className={`${styles.navtitle}`}><div><h2>{name}</h2></div>
+                    <div><h3 style={{marginBottom: "5%",marginTop:"2%"}}>{email}</h3></div></div>
                     <ul>
-                        <li ><Link className={`${styles.tabs}`} href="/profile"><div><MdPermContactCalendar /></div> <div>My Profile</div></Link></li>
+                        <li ><Link className={`${styles.tabs}`} to="/profile"><div><MdPermContactCalendar /></div> <div>My Profile</div></Link></li>
                         <li><Link className={`${styles.tabs}`} to="/CHpass"><TbPasswordFingerprint /> Change Password</Link></li>
-                        <li  onMouseOver={dropdown1} onMouseLeave={dropdown2}><a className={`${styles.tabs} ${styles.dropdown}`} href="/"><BsFillGrid3X3GapFill  /> Leaves</a>
+                        <li  onMouseOver={dropdown1} onMouseLeave={dropdown2}><Link className={`${styles.tabs} ${styles.dropdown}`} to="/"><BsFillGrid3X3GapFill  /> Leaves</Link>
                             <div style={Leavehide} className={`${styles.dropdown_cont}`}>
-                                <Link href="/leavehistory">Leave History</Link>
-                                <Link href="/leaverequest">Apply Leave</Link>
+                                <Link to="/leavehistory">Leave History</Link>
+                                <Link to="/leaverequest">Apply Leave</Link>
                             </div>
                         </li>
-                        <li onClick={rmv}><Link className={`${styles.tabs}`} href="/"><IoMdLogOut /> Sign Out</Link></li>
+                        <li onClick={rmv}><Link className={`${styles.tabs}`} to="/"><IoMdLogOut /> Sign Out</Link></li>
 
                     </ul>
 
