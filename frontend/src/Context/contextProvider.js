@@ -1,11 +1,11 @@
 // MyContextProvider.js
 import React, { useState,useContext } from "react";
-import Cookies from 'js-cookie';
+
+import Cookies from 'js-cookie'
 import MyContext from "./createContext";
 const MyContextProvider = ({ children }) => {
 const[initial,setInitial]=useState("context value");
 const token = Cookies.get('jwt');
-
 const findPos=async()=>{
   const token = localStorage.getItem('factoken');
   const obj = {"token":token};
@@ -20,20 +20,55 @@ const findPos=async()=>{
   console.log("pos called");
   console.log(resJson);
   localStorage.setItem("pos",resJson.position);
+  localStorage.setItem("CLLeavesLeft",resJson.CLLeavesLeft);
+  localStorage.setItem("PLLeaves",resJson.PLLeaves);
+  localStorage.setItem('department',resJson.department);
+  localStorage.setItem('email',resJson.email);
+  localStorage.setItem('name',resJson.name);
   }
   
 const dataSend=async(path,obj)=>{
   try{
-    const response = await fetch('http://localhost:3500/login', {
+    const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          // Add any additional headers if needed
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(obj),
       });
   const resJson = await response.json();
-  console.log(resJson.message);
+// Extract cookies from the response headers
+const cookies = response.headers.get('jwt');
+console.log(token);
+// Save the cookies to the document.cookie
+if (cookies) {
+  document.cookie = cookies;
+}
+localStorage.setItem('factoken',resJson.accessToken);
+  console.log(resJson);
+ await findPos();
+  }catch(e){
+    console.log("issue occured");
+  }
+
+}
+
+// temp function
+const dataSend2=async(path,obj)=>{
+  try{
+    const token = localStorage.getItem("factoken");
+    const response = await fetch(path, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(obj),
+      });
+  const resJson = await response.json();
+
+  console.log(resJson);
   }catch(e){
     console.log("issue occured");
   }
@@ -41,8 +76,7 @@ const dataSend=async(path,obj)=>{
 }
 
 
-
-const obj ={initial,setInitial,dataSend}
+const obj ={initial,setInitial,dataSend,dataSend2}
 
   return (
     <MyContext.Provider value={obj}>

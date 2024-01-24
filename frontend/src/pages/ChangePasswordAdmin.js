@@ -1,14 +1,14 @@
 import React from 'react';
-import FacultyHeader from '../components/Header/FacultyHeader';
+import AdminHeader from '../components/Header/AdminHeader';
 import ChangePassword from '../components/ChangePassword/ChangePassword';
-function CHpass()
+function CHpassA()
 {
     return(
         <div>
-        <FacultyHeader />
+        <AdminHeader />
         <ChangePassword />
         </div>
     );
 };
 
-export default CHpass;
+export default CHpassA;

@@ -48,7 +48,12 @@ const sendDesignation=async(req,res)=>{
             console.log(fac);
             res.json({
                 position:fac.designation,
-                
+                CLLeavesLeft:fac.CLLeavesLeft,
+                PLLeaves:fac.PLLeaves,
+                department:fac.department,
+                email:fac.email,
+                name:fac.name,
+
             });
         }
         });
