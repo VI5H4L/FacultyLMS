@@ -1,8 +1,17 @@
 import React from "react";
 import styles from './AdminDashboard.module.css';
-
+import ReqBar from "../RequestBar/RequestBar";
 function ADash()
 {
+    const LeaveReq=[
+        {id:"1",name:"Faculty1",LeaveType:"CL",PostingDate:"10/01/2024",status:"pending"},
+        {id:"2",name:"Faculty2",LeaveType:"PL",PostingDate:"15/01/2024",status:"pending"}
+    ];
+    const listItem= LeaveReq.map((item)=>{
+        return(
+            <ReqBar id={item.id} name={item.name} lt={item.LeaveType} pd={item.PostingDate} st={item.status}/>
+        );
+    });
     return(
         <div className={`${styles.mainDash}`}>
             <div className={`${styles.Topblock}`}>
@@ -21,9 +30,10 @@ function ADash()
                     <div>Action</div>
                </div>
             </div>
-            {/* <div>
-                <h3>END OF PAGE</h3>
-            </div> */}
+            <div className={`${styles.reqbar}`}>
+                {listItem}
+            </div>
+
         </div>
     );
 }
