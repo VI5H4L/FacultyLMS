@@ -66,6 +66,7 @@ const Register = () => {
                         value={formData.department}
                         onChange={handleInputChange}
                     />
+                    <div style={{position: 'relative'}}>
                     <input 
                         className={`${styles.form_inp}`} 
                         type="date" 
@@ -73,7 +74,7 @@ const Register = () => {
                         placeholder="Date of Joining" 
                         value={formData.dateOfJoining}
                         onChange={handleInputChange}
-                    />
+                    /></div>
                     <input 
                         className={`${styles.form_inp}`} 
                         type="password" 

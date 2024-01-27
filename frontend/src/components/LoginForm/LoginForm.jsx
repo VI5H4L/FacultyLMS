@@ -26,9 +26,9 @@ const Login = () => {
        }else if(pos=='faculty'){
             nav('/leaverequest');
        }else if(pos=='director'){
-            nav('/');
+            nav('/leaverequest');
        }else if(pos=='dofa'){
-            nav('/');
+            nav('/leaverequest');
        }
        else{
         alert("Invalid Credentials!");

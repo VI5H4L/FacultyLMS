@@ -3,6 +3,13 @@
     
     display: grid;
     place-items: center;
+    
+}
+.reqbar
+{
+    display: grid;
+    /* grid-auto-flow: column; */
+    place-items: center;
 }
 .Topblock
 {
