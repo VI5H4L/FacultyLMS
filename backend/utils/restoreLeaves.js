@@ -17,18 +17,28 @@ const scheduleUpdateCL = async () => {
     const currentYear = today.getFullYear();
 
     //fetch academic year date
-    const ins = await Institute.find();
-    const newAcademicYearStartDate =  ins[0].newAcademicYear;
+    const ins = await Institute.findOne({name : 'lnmiit'});
+
+    if (!ins) {
+        const instituteDetails = {
+            name : "lnmiit",
+            newAcademicYear : new Date()
+        };
+        const result = await Institute.create();
+    }
+
+    const newAcademicYearStartDate =  ins.newAcademicYear;
     const date = newAcademicYearStartDate.getDate();
     const month = newAcademicYearStartDate.getMonth() + 1;
 
-    const nextAcademicYearStartDate = new Date(currentYear + date,month,1);
+    const nextAcademicYearStartDate = new Date(currentYear + 1,month,date);
   
     // Calculate the time difference in milliseconds
     const timeUntilNextAcademicYear = nextAcademicYearStartDate - today;
 
     setTimeout(() => {
         updateCL();
+        resetExceedingPL();
         scheduleUpdateCL();
     }, timeUntilNextAcademicYear);
 };
@@ -50,8 +60,35 @@ const incrementPL = async() => {
     }
 };
 
+const scheduleIncrementPL = async () => {
+    const today = new Date();
+    const nextMonthStartDate = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+
+    // Calculate the time difference in milliseconds until the start of the next month
+    const timeUntilNextMonth = nextMonthStartDate - today;
+
+    setTimeout(() => {
+        incrementPL();
+        // Reschedule for the start of the next month
+        scheduleIncrementPL();
+    }, timeUntilNextMonth);
+};
+
+const resetExceedingPL = async () => {
+    try {
+        // Reset leaves to 60 for faculty members with leaves exceeding 60
+        await Faculty.updateMany({ leaves: { $gt: 60 } }, { leaves: 60 });
+    
+        console.log(`Reset leaves to 60 for faculty members with leaves exceeding 60 for the academic year}`);
+      } catch (error) {
+        console.error('Error resetting leaves:', error);
+      }
+}
+
 module.exports = {
     updateCL,
     scheduleUpdateCL,
-    incrementPL
-}
+    incrementPL,
+    scheduleIncrementPL,
+    resetExceedingPL
+};

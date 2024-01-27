@@ -2,8 +2,8 @@ const Leave = require('../model/Leave');
 const Faculty = require('../model/Faculty');
 const fsPromises = require('fs').promises;
 const path = require('path');
-//const file = require('../views')
 const sendMail = require('../utils/mails');
+
 
 const getAllLeaves = async (req,res) => {
     const leaves = await Leave.find();
@@ -91,10 +91,10 @@ const handleLeaveResponse = async (req,res) => {
         if (!status) return req.status(401).json({'message' : 'Status is required'});
         
         const faculty = await Faculty.findOne( {email} ).exec();
-        const leave = await Leave.findOne( {leaveID} ).exec();
-
-        if (leave.status == status) return res.status(200).json( {'message' : 'Leave already responde'} );
-
+        const leave = await Leave.findOne( {_id : leaveID} ).exec();
+        
+        if (leave.status == status) return res.status(200).json( {'message' : 'Leave already respond'} );
+        
         leave.status = status;
         if (leave.status == 'approved') {
             const type = leave.typeOfLeave;

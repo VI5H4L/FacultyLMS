@@ -13,7 +13,7 @@ headers : {
 
 4. /faculty/ ,GET, res : an array of all faculties , only for admin
 
-5. /faculty/:email ,GET, res : {}faculty Object,You will get all the detaitls and all the leaves of the employee
+5. /faculty/:email , GET, res : {}faculty Object,You will get all the detaitls and all the leaves of the employee
 
 6. /faculty/ , POST,
      body : {

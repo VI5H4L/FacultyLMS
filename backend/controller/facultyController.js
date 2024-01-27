@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt');
 const fsPromises = require('fs').promises;
+const path = require('path');
 const Faculty = require('../model/Faculty');
 const generateDefaultPassword = require('../utils/generateDefaultPassword');
-const path = require('path');
 const sendMail = require('../utils/mails');
+const isLNMIITEmail = require('../utils/isLNMIITEmail');
 
 const getAllFaculties = async (req,res) => {
     const faculties = await Faculty.find();
@@ -24,6 +25,8 @@ const getFaculty = async (req, res) => {
 const createNewFaculty = async (req, res) => {
     if(!req?.body) return res.sendStatus(400);
     const faculty = req.body;
+
+    if (!isLNMIITEmail(faculty.email)) return res.status(401).json({'message' : 'Email is not of required Domain'});
 
     const duplicate = await Faculty.findOne({ email: faculty.email }).exec();
     if (duplicate) return res.sendStatus(409); //Conflict 
@@ -55,7 +58,7 @@ const createNewFaculty = async (req, res) => {
     }
     sendMail(mailOptions);
 
-    res.status(201).json({ 'success': `New faculty ${faculty.name} created!` });
+    res.status(201).json({ 'message' : `New faculty ${faculty.name} created! with password ${password}` });
 };
 
 const updateFaculty = async (req, res) => {
