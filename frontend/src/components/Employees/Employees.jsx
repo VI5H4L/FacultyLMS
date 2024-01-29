@@ -26,6 +26,14 @@ const Register = () => {
         }));
     };
 
+    const handleInputChange1 = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value.toLowerCase()
+        }));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dataSend2("http://localhost:3000/register", formData);
@@ -51,7 +59,7 @@ const Register = () => {
                         name="email"
                         placeholder="Email id"
                         value={formData.email}
-                        onChange={handleInputChange}
+                        onChange={handleInputChange1}
                     />
                     {/*<input
                         className={`${styles.form_inp}`}

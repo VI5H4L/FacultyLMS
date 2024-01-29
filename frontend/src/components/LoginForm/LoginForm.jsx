@@ -47,7 +47,7 @@ const Login = () => {
                             type="email"
                             name="name"
                             placeholder="Email id"
-                            onChange={(e) => setState({ ...state, email: e.target.value })}
+                            onChange={(e) => setState({ ...state, email: e.target.value.toLowerCase() })}
                             value={state.email}
                         />
                         <input
