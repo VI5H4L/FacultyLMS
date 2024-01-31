@@ -38,6 +38,7 @@
     outline: none;
     border-bottom: 1px solid black;
     font-size: 1.2rem;
+    width: 100%;
 }
 .form_but
 {

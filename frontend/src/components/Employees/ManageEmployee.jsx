@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import styles from './Employees.module.css';
 import MyContext from '../../Context/createContext';
 
-const Register = () => {
+const ManageE = () => {
 
     const { dataSend2 } = useContext(MyContext);
     const [formData, setFormData] = useState({
@@ -42,25 +42,35 @@ const Register = () => {
 
     return (
         <div className={`${styles.Login}`}>
-            <div><h1>REGISTER EMPLOYEES</h1></div>
+            <div><h1>MANAGE EMPLOYEES</h1></div>
             <div className={`${styles.form}`}>
                 <form className={`${styles.form_div}`} onSubmit={handleSubmit}>
-                    <input
+                    {/*<input
                         className={`${styles.form_inp}`}
                         type="text"
                         name="employeeNo"
                         placeholder="Employee Number"
                         value={formData.employeeNo}
                         onChange={handleInputChange}
-                    />
+    />*/}
                     <input
                         className={`${styles.form_inp}`}
-                        type="email"
-                        name="email"
-                        placeholder="Email id"
-                        value={formData.email}
+                        type="text"
+                        name="EmpNo"
+                        placeholder="Employee No."
+                        value={formData.employeeNo}
                         onChange={handleInputChange1}
                     />
+                    <div><label>Email:</label>
+                    <select value={formData.email} onChange={handleInputChange} name="email" id="email"  className={`${styles.form_inp}`}>
+                        <option value="CSE">director email</option>
+                        <option value="CCE">dofa email</option>
+                        <option value="ECE">HOD of CSE </option>
+                        <option value="ECE">HOD of CCE </option>
+                        <option value="ECE">HOD of ECE </option>
+                        <option value="ECE">HOD of MME </option>
+                        
+                    </select></div>
                     {/*<input
                         className={`${styles.form_inp}`}
                         type="text"
@@ -120,7 +130,7 @@ const Register = () => {
                         onChange={handleInputChange}
     /> */}
                     <div className={`${styles.form_but}`}>
-                        <button type="submit" onClick={clickedbut}>SIGN UP</button>
+                        <button type="submit" onClick={clickedbut}>Submit Changes</button>
                     </div>
                 </form>
             </div>
@@ -128,4 +138,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default ManageE;
