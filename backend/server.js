@@ -10,7 +10,7 @@ const cors = require('cors');
 const verifyJWT = require('./middleware/verifyJWT');
 // Used to restore Leaves at end of Academic Year
 const restoreLeaves = require('./utils/restoreLeaves');
-
+const initializeLMS = require('./utils/intializeLMS');
 // Configuration Details
 const PORT = process.env.PORT || 3000;
 const connectDB = require("./config/connectDB");
@@ -38,6 +38,8 @@ mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
+        initializeLMS()
+
         // restoreLeaves.scheduleUpdateCL();
         // restoreLeaves.scheduleIncrementPL();
     });

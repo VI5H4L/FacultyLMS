@@ -2,14 +2,29 @@ const mongoose = require("mongoose");
 
 const instituteSchema = new mongoose.Schema({
     name : String,
-    newAcademicYear : Date,
+    newAcademicYear : {
+        type : Date,
+        default : Date.now()
+    },
     summerBreak : {
-        start : Date,
-        end : Date
+        start : {
+            type : Date,
+            default : Date.now()
+        },
+        end : {
+            type : Date,
+            default : Date.now()
+        }
     },
     winterBreak : {
-        start : Date,
-        end : Date
+        start : {
+            type : Date,
+            default : Date.now()
+        },
+        end : {
+            type : Date,
+            default : Date.now()
+        }
     }
 });
 

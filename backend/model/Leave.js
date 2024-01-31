@@ -5,6 +5,10 @@ const leaveSchema = new mongoose.Schema(
         from : Date,
         to : Date,
         days : Number,
+        dateCreated : {
+            type : Date
+        },
+        dateStatusUpdate : Date,
         typeOfLeave : {
             type : String,
             enum : ["CL","PL","OD"]
@@ -19,6 +23,17 @@ const leaveSchema = new mongoose.Schema(
             id :{
                 type : mongoose.Schema.Types.ObjectId,
                 ref : "Faculty"
+            }
+        },
+        substitute : {
+            content: {
+                type: Buffer,
+            },
+            contentType: {
+                type: String,
+            },
+            originalname: {
+                type: String,
             }
         }
     }

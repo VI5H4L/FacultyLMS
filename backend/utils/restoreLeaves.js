@@ -19,14 +19,6 @@ const scheduleUpdateCL = async () => {
     //fetch academic year date
     const ins = await Institute.findOne({name : 'lnmiit'});
 
-    if (!ins) {
-        const instituteDetails = {
-            name : "lnmiit",
-            newAcademicYear : new Date()
-        };
-        const result = await Institute.create();
-    }
-
     const newAcademicYearStartDate =  ins.newAcademicYear;
     const date = newAcademicYearStartDate.getDate();
     const month = newAcademicYearStartDate.getMonth() + 1;
