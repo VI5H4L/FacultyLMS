@@ -8,6 +8,7 @@ const facultySchema = new mongoose.Schema({
   password: String,
   department: String,
   dateOfJoining : Date,
+  lastLeave: Date,
   CLLeavesLeft : {
     type : Number,
     default : 8

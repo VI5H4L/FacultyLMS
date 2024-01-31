@@ -1,0 +1,35 @@
+How every route works -> 
+
+1.  /login ,POST ,body : {email,password} , response : {accessToken} , a cookie will be saved which can be accessses by Cookies.get('jwt') in frontend
+
+2. /logout ,GET ,no body,no response , cookie will be deleted
+
+Note : To access further routes they must contain oe else it would be considered unauthorized
+headers : {
+    'Authorization' : `Bearer ${token}`
+}
+
+3. /changePassword ,POST, body : {oldPassword,newPassword}
+
+4. /faculty/ ,GET, res : an array of all faculties , only for admin
+
+5. /faculty/:email , GET, res : {}faculty Object,You will get all the detaitls and all the leaves of the employee
+
+6. /faculty/ , POST,
+     body : {
+        employeeNumber,
+        name,
+        email,
+        department,
+        designation,
+        dateOfJoining,
+        CLLeavesLeft,
+        PLLeaves
+    },
+    Only for Admin
+
+7. /leave/ ,GET, res : [] gets All Leaves of All the Faculties , Only for Admin
+
+8. /leave/ ,POST,body : {from,to,days,reason} ,res : {leave}
+
+9. /leave/response ,PUT ,body : {email,leaveID,status}, res : {leave},this will handle the updation of status of leave and deduction count of leaves on approval

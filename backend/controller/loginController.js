@@ -1,17 +1,17 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Faculty = require('../model/Faculty');
+const isLNMIITEmail = require('../utils/isLNMIITEmail');
 
 const handleLogin = async (req,res)=>{
     const {email , password} = req.body;
-    console.log(req.body);
     if(!(email && password)) return res.status(400).json({'message':`EmailId and password required`});
+
+    if (!isLNMIITEmail(email)) return res.status(401).json({'message' : 'Email is not of required Domain'});
 
     const validUser = await Faculty.findOne({ email }).exec();
     if (!validUser) return res.sendStatus(401);
     const validPass = await bcrypt.compare(password,validUser.password); 
-    console.log("come here");
-    console.log(validPass)
     if  (validPass) {
         //create JWT
         const accessToken = jwt.sign(
@@ -52,8 +52,7 @@ const sendDesignation=async(req,res)=>{
                 PLLeaves:fac.PLLeaves,
                 department:fac.department,
                 email:fac.email,
-                name:fac.name,
-
+                name:fac.name
             });
         }
         });

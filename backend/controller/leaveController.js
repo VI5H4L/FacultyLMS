@@ -2,8 +2,8 @@ const Leave = require('../model/Leave');
 const Faculty = require('../model/Faculty');
 const fsPromises = require('fs').promises;
 const path = require('path');
-//const file = require('../views')
 const sendMail = require('../utils/mails');
+
 
 const getAllLeaves = async (req,res) => {
     const leaves = await Leave.find();
@@ -16,20 +16,30 @@ const createLeave = async (req,res) => {
         const email = req.params.email ? req.params.email : req.faculty.email;
         const faculty = await Faculty.findOne({ email }).exec();
         console.log(faculty);
-        const leave = new Leave(req.body);
+        const leave = new Leave(
+            {
+                ...req.body,
+                bsubstitute: {
+                    content: req.file.buffer,
+                    contentType: req.file.mimetype,
+                    originalname: req.file.originalname,
+                }
+            }
+        );
         console.log(leave);      
 
         if ( leave.typeOfLeave == 'CL' ) {
             if(faculty.CLLeavesLeft < leave || leave.days >= 2) {
-                res.status(406).json({'message' : 'Leave not accepted'});
-                return;
+                return res.status(406).json({'message' : 'Leave not accepted'});
             }
         } else if( leave.typeOfLeave == 'PL' ){
             if( faculty.PLLeaves < leave.days || leave.days < 3) {
-                res.status(406).json({'message' : 'Leave not accepted'});
-                return;
+                return res.status(406).json({'message' : 'Leave not accepted'});
             }
-        }
+        };
+
+        leave.dateCreated = new Date();
+
         faculty.leaves.push(leave);
         await leave.save();
         await faculty.save();
@@ -43,7 +53,9 @@ const createLeave = async (req,res) => {
             reciever = process.env.EMAIL_DIR;
         }
         const fileData = await fsPromises.readFile(path.join(__dirname,'..','views','newLeaveApplied.html'),'utf-8');
+        // Here we will do the processing on template mail
         const emailBody = fileData;
+
         const mailOptions  = {
             to: reciever,
             subject: "FLMS Leave",
@@ -59,8 +71,7 @@ const createLeave = async (req,res) => {
 const updateLeave = async (req, res) => {
     if (!req?.body?.status) {
         return res.status(400).json({ 'message': 'Status parameter is required.' });
-    }
-
+    };
     const { email, leaveId } = req.params;
     const faculty = await Faculty.findOneAndUpdate(email, { $pull: {leaves :leaveId}});
     const leave = await Leave.findOneAndUpdate(leaveId);
@@ -91,10 +102,10 @@ const handleLeaveResponse = async (req,res) => {
         if (!status) return req.status(401).json({'message' : 'Status is required'});
         
         const faculty = await Faculty.findOne( {email} ).exec();
-        const leave = await Leave.findOne( {leaveID} ).exec();
-
-        if (leave.status == status) return res.status(200).json( {'message' : 'Leave already responde'} );
-
+        const leave = await Leave.findOne( {_id : leaveID} ).exec();
+        
+        if (leave.status == status) return res.status(200).json( {'message' : 'Leave already respond'} );
+        
         leave.status = status;
         if (leave.status == 'approved') {
             const type = leave.typeOfLeave;
@@ -106,6 +117,8 @@ const handleLeaveResponse = async (req,res) => {
                 faculty.PLLeaves = faculty.PLLeaves - leave.days;
             }
         }
+        faculty.lastLeave = new Date();
+        leave.dateStatusUpdate = new Date();
         const result = await leave.save();
         await faculty.save();
 
