@@ -19,11 +19,11 @@ const createLeave = async (req,res) => {
         const leave = new Leave(
             {
                 ...req.body,
-                bsubstitute: {
-                    content: req.file.buffer,
-                    contentType: req.file.mimetype,
-                    originalname: req.file.originalname,
-                }
+                // substitute: {
+                //     content: req.file.buffer,
+                //     contentType: req.file.mimetype,
+                //     originalname: req.file.originalname,
+                // }
             }
         );
         console.log(leave);      
@@ -116,8 +116,8 @@ const handleLeaveResponse = async (req,res) => {
             if (type == 'PL') {
                 faculty.PLLeaves = faculty.PLLeaves - leave.days;
             }
-        }
-        faculty.lastLeave = new Date();
+            faculty.lastLeave = new Date();
+        };
         leave.dateStatusUpdate = new Date();
         const result = await leave.save();
         await faculty.save();

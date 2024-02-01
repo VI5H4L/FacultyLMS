@@ -59,9 +59,8 @@ const createNewFaculty = async (req, res) => {
             html: emailBody 
         };
 
-        const mailResult = await sendMail(mailOptions);
-        console.log(mailResult);
         await result.save();
+        const mailResult = await sendMail(mailOptions);
 
         res.status(201).json({ 'message' : `New faculty ${faculty.name} created! with password ${password}` });
     } catch (err) {
