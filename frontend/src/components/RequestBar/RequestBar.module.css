@@ -1,15 +1,97 @@
-.bars
+.bars 
 {
     display: grid;
+    grid-template-columns: 1fr 3fr 2.5fr 2.5fr 1.5fr 3fr;
     grid-auto-flow: column;
-    column-gap: 5.5rem;
-    width: fit-content;
-    padding: 4.5% 4.96%;
+    width: 100%;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     
-    background-color: rgb(203, 201, 201);
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between; */
+    /* column-gap: 15%; */
+    /* gap: 10%; */
+    
+    /* width: fit-content; */
+    /* padding: 3% 3%; */
+    background-color: wheat;
     border: 1px solid black;
 
 }
+
+
+/* CSS */
+button {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 6px;
+  padding-right: 6px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 1rem;
+}
+
+button:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+button:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+.popup{
+   width: 64%;
+   background-color: aqua;
+   visibility: hidden;
+}
+
+h3
+{
+    display: grid;
+    place-items: center;
+}
+
+td
+{
+    display: grid;
+    place-items: center;
+}
+/* table
+{
+    display: grid;
+    grid-template-columns: 1fr 3fr 2.5fr 2.5fr 1.5fr 3fr;
+    place-items: start;
+    font-weight: 500;
+    
+} */
+
 .approve
 {
     background-color: green;
