@@ -46,6 +46,7 @@ function AdminHeader() {
                         <li><Link className={`${styles.tabs}`} to="/ManageDepartments"><BsFillGrid3X3GapFill /> Department</Link></li>
                         {/* <li><Link className={`${styles.tabs}`} to="/"><TbBracketsAngle /> Leave Type</Link></li> */}
                         <li><Link className={`${styles.tabs}`} to="/addemp"><MdPermContactCalendar /> Add Employee</Link></li>
+                        <li><Link className={`${styles.tabs}`} to="/ManageEmployees"><MdPermContactCalendar /> Manage Employees</Link></li>
                         {/* <li><Link className={`${styles.tabs}`} to="/ManageEmployees"><div><MdPermContactCalendar /></div> <div>Employees</div></Link></li> */}
                         <li><Link className={`${styles.tabs}`} to="/admin"><MdOutlineMonitor /> Leave Management</Link></li>
                         <li><Link className={`${styles.tabs}`} to="/CHpassA"><TbPasswordFingerprint /> Change Password</Link></li>
