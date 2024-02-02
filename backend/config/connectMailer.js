@@ -4,7 +4,7 @@ const connectMailer = () => {
   console.log(1);
   const transporter = nodemailer.createTransport({
     service : "gmail",
-    host: "smtp.gmail.com",
+    host: "smtp.googlemail.com",
     port: 465,  
     secure: false,
     auth: {

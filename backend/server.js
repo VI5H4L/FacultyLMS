@@ -36,11 +36,11 @@ app.use('/config',require('./routes/config'));
 // Running Servers
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => {
+    app.listen(PORT, async () => {
         console.log(`Server running on port ${PORT}`);
         initializeLMS()
 
-        // restoreLeaves.scheduleUpdateCL();
-        // restoreLeaves.scheduleIncrementPL();
+        // await restoreLeaves.scheduleIncrementPL();
+        // await restoreLeaves.scheduleUpdateCL();
     });
 });

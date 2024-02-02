@@ -11,6 +11,7 @@ const canApprove = require('../middleware/canApprove');
 
 const leaveController = require('../controller/leaveController');
 router.get('/',isAdmin,leaveController.getAllLeaves)
+    .get('/:designation',leaveController.getLeaves)
     .post('/',upload.single('pdfFile'),leaveController.createLeave)
     .put('/:email/:leaveId',leaveController.updateLeave)
     .put('/response',canApprove ,leaveController.handleLeaveResponse)
