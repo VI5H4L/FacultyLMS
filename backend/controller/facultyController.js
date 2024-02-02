@@ -52,7 +52,7 @@ const createNewFaculty = async (req, res) => {
         //send mail to faculty regarding default password
         const fileData = await fsPromises.readFile(path.join(__dirname,'..','views','newFacultyMail.html'),'utf-8');
         const emailBody = fileData.replace('{{TEMP_PASSWORD}}',password);
-
+        
         const mailOptions = {
             to: result.email,
             subject: "FLMS Account Created",

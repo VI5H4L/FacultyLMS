@@ -132,8 +132,34 @@ const handleLeaveResponse = async (req,res) => {
 
 };
 
+const getLeaves = async (req,res) => {
+    const designation = req.faculty.designation;
+    let rangeOfDays = [0,0];
+    if ( designation == 'hod' ) {
+        rangeOfDays[0] = 1;
+        rangeOfDays[1] = 7;
+    }
+    if ( designation == 'dofa' ) {
+        rangeOfDays[0] = 8;
+        rangeOfDays[1] = 15;
+    }
+    if ( designation == 'director' ) {
+        rangeOfDays[0] = 16;
+        rangeOfDays[1] = 30;
+    }
+
+    const leaves = await Leave.find({
+        days: { $gt: rangeOfDays[0], $lt: rangeOfDays[1] }
+    });
+
+    if (!leaves) return res.status(400).json({'message' : 'No leave found'});
+
+    res.status(200).json(leaves);
+};
+
 module.exports = {
     getAllLeaves,
+    getLeaves,
     createLeave,
     updateLeave,
     deleteLeave,
