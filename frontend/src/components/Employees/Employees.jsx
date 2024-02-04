@@ -1,23 +1,22 @@
 import React, { useContext, useState } from 'react';
 import styles from './Employees.module.css';
-import MyContext from '../../Context/createContext';
+import axios from '../../api/axios';
+import Cookies from 'js-cookie';
+
 
 const Register = () => {
 
-    const { dataSend2 } = useContext(MyContext);
+    const token = Cookies.get('jwt');
+    const [errMsg,setErrMsg] = useState('');
+
     const [formData, setFormData] = useState({
         employeeNo: '',
         email: '',
         designation: '',
         department: '',
-        dateOfJoining: '',
-        password: '',
-        confirmPassword: ''
+        dateOfJoining: ''
     });
-    function clickedbut()
-    {
-        alert("Employee created successfully!")
-    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -34,15 +33,35 @@ const Register = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dataSend2("http://localhost:3000/faculty/", formData);
-        // Add form submission logic here
+        setErrMsg('');
+        try {
+            console.log(formData,token);
+            const response = await axios.post('/faculty/',
+                formData ,
+                {
+                    headers : {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
+            console.log(response);
+            
+        } catch (err) {
+            console.log(err);
+            if (err.response.status == 401) {
+                setErrMsg("Email is not of required Domain");
+            }
+            alert(errMsg);
+        };
+        
     };
 
     return (
         <div className={`${styles.Login}`}>
-            <div><h1>REGISTER EMPLOYEES</h1></div>
+            <div><h1>ADD EMPLOYEES</h1></div>
             <div className={`${styles.form}`}>
                 <form className={`${styles.form_div}`}>
                     <input

@@ -20,10 +20,8 @@ const leaveSchema = new mongoose.Schema(
             default: "pending"
         },
         faculty : {
-            id :{
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "Faculty"
-            }
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Faculty"
         },
         substitute : {
             content: {

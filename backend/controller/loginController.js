@@ -24,7 +24,7 @@ const handleLogin = async (req,res)=>{
             { expiresIn : '3d'}//options
         );
         res.cookie('jwt',accessToken,{ httpOnly:true, maxAge : 24 * 60 * 60 * 1000,sameSite:"None" });
-        res.json( {accessToken} );
+        res.json( { accessToken, designation : validUser.designation } );
     }
     else{
         res.sendStatus(401);
