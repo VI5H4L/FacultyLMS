@@ -36,7 +36,7 @@ const ManageE = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dataSend2("http://localhost:3000/register", formData);
+        dataSend2(`${process.env.REACT_APP_LINK}/register`, formData);
         // Add form submission logic here
     };
 

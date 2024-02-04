@@ -11,7 +11,7 @@ const token = Cookies.get('jwt');
 const findPos=async()=>{
   const token = localStorage.getItem('factoken');
   const obj = {"token":token};
-  const response= await fetch('http://localhost:3000/login/sendpos', {
+  const response= await fetch(`${process.env.REACT_APP_LINK}/login/sendpos`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const findPos=async()=>{
   
 const dataSend=async(path,obj)=>{
   try{
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch(`${process.env.REACT_APP_LINK}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
