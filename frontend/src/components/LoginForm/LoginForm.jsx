@@ -5,6 +5,9 @@ import {useNavigate} from "react-router-dom";
 import Cookies from 'js-cookie';
 import axios from '../../api/axios';
 const LOGIN_URL = `${process.env.REACT_APP_LINK}/login`;
+console.log('====================================');
+console.log(LOGIN_URL);
+console.log('====================================');
 
 
 
