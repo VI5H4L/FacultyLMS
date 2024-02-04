@@ -6,7 +6,7 @@ const sendMail = require('../utils/mails');
 
 
 const getAllLeaves = async (req,res) => {
-    const leaves = await Leave.find();
+    const leaves = await Leave.find().populate();
     if (!leaves) return res.status(204).json({ 'message': 'No Leaves found.' });
     res.json(leaves);
 }

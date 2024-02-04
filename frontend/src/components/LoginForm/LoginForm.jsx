@@ -1,38 +1,65 @@
-import React, { useContext, useState } from "react";
+import React, { useRef, useState, useEffect, useContext  } from "react";
 import styles from './LoginForm.module.css';
-import MyContext from "../../Context/createContext";
-import {useNavigate} from "react-router-dom"
+
+import {useNavigate} from "react-router-dom";
+import Cookies from 'js-cookie';
+import axios from '../../api/axios';
+const LOGIN_URL = '/login';
+
+
+
 const Login = () => {
     const nav = useNavigate();
-    const { dataSend } = useContext(MyContext);
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [state, setState] = useState({
-        email: "",
-        password: ""
-    });
-
-    const add = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (state.email === "" || state.password === "") {
-            alert("All fields are mandatory!!");
-            return;
+
+        try {
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({ email, password }),
+                {
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+
+            const accessToken = response.data.accessToken;
+            const designation = response.data.designation;
+            
+            Cookies.set('jwt',accessToken);
+            
+            setEmail('');
+            setPassword('');
+
+            if(designation=='admin'){
+                nav('/admin');
+            }
+            else if(designation=='faculty'){
+                nav('/leaverequest');
+            }
+            else if(designation=='director'){
+                nav('/leaverequest');
+            }
+            else if(designation=='dofa'){
+                nav('/leaverequest');
+            }
+
+        } catch(err) {
+            console.log(err.response);
+            if (!err?.response) {
+                alert('No Server Response');
+            } else if (err.response?.status === 400) {
+                alert('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                alert('Unauthorized');
+            } else {
+                alert('Login Failed');
+            }
         }
-      await  dataSend("", state);
-      setState({ email: "", password: "" });
-       const pos = localStorage.getItem("pos");
-       console.log(pos);
-       if(pos=='admin'){
-            nav('/admin');
-       }else if(pos=='faculty'){
-            nav('/leaverequest');
-       }else if(pos=='director'){
-            nav('/leaverequest');
-       }else if(pos=='dofa'){
-            nav('/leaverequest');
-       }
-       else{
-        alert("Invalid Credentials!");
-       }
+
     };
 
     return (
@@ -41,22 +68,22 @@ const Login = () => {
             <div className={`${styles.form}`}>
                 <div><h2>Login</h2></div>
                 <div>
-                    <form className={`${styles.form_div}`} onSubmit={add}>
+                    <form className={`${styles.form_div}`} onSubmit={handleSubmit}>
                         <input
                             className={`${styles.form_inp}`}
                             type="email"
                             name="name"
                             placeholder="Email id"
-                            onChange={(e) => setState({ ...state, email: e.target.value.toLowerCase() })}
-                            value={state.email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                         />
                         <input
                             className={`${styles.form_inp}`}
                             type="password"
                             name="name"
                             placeholder="Password"
-                            onChange={(e) => setState({ ...state, password: e.target.value })}
-                            value={state.password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
                         />
                         <div className={`${styles.form_but}`} >
                             <button type="submit">SIGN IN</button>
