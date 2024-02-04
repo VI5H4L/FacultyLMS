@@ -1,5 +1,7 @@
 // MyContextProvider.js
 import React, { useState,useContext } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Cookies from 'js-cookie'
 import MyContext from "./createContext";
@@ -67,9 +69,16 @@ const dataSend2=async(path,obj)=>{
         body: JSON.stringify(obj),
       });
   const resJson = await response.json();
-
+  if(!resJson.ok)
+  {
+    throw new Error(resJson.message);
+  }
   console.log(resJson);
   }catch(e){
+    console.log('====================================');
+    toast.error(`${e.meassge}`, { autoClose: 3000 });
+    console.log(e);
+    console.log('====================================');
     console.log("issue occured");
   }
 

@@ -26,7 +26,6 @@ const createNewFaculty = async (req, res) => {
     try {
         if(!req?.body) return res.sendStatus(400);
         const faculty = req.body;
-
         if (!isLNMIITEmail(faculty.email)) return res.status(401).json({'message' : 'Email is not of required Domain'});
 
         const duplicate = await Faculty.findOne({ email: faculty.email }).exec();
@@ -61,6 +60,7 @@ const createNewFaculty = async (req, res) => {
 
         await result.save();
         const mailResult = await sendMail(mailOptions);
+
 
         res.status(201).json({ 'message' : `New faculty ${faculty.name} created! with password ${password}` });
     } catch (err) {

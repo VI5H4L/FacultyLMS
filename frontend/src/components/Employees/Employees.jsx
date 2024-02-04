@@ -36,7 +36,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dataSend2("http://localhost:3000/register", formData);
+        dataSend2("http://localhost:3000/faculty/", formData);
         // Add form submission logic here
     };
 
@@ -44,7 +44,7 @@ const Register = () => {
         <div className={`${styles.Login}`}>
             <div><h1>REGISTER EMPLOYEES</h1></div>
             <div className={`${styles.form}`}>
-                <form className={`${styles.form_div}`} onSubmit={handleSubmit}>
+                <form className={`${styles.form_div}`}>
                     <input
                         className={`${styles.form_inp}`}
                         type="text"
@@ -120,7 +120,7 @@ const Register = () => {
                         onChange={handleInputChange}
     /> */}
                     <div className={`${styles.form_but}`}>
-                        <button type="submit" onClick={clickedbut}>SIGN UP</button>
+                        <button type="submit" onClick={handleSubmit}>SIGN UP</button>
                     </div>
                 </form>
             </div>
