@@ -24,11 +24,11 @@ function ADash()
     let listItem;
     useEffect(() => {
         getAllLeaves();
-        listItem = leaves.map((item)=>{
-            return(
-                <ReqBar name={item.faculty.name} lt={item.typeOfLeave} pd={item.dateCreated} st={item.status} />
-            );
-        });
+        // listItem = leaves.map((item)=>{
+        //     return(
+        //         <ReqBar name={item.faculty.name} lt={item.typeOfLeave} pd={item.dateCreated} st={item.status} />
+        //     );
+        // });
     }, [])
 
     const getAllLeaves = async () => {
